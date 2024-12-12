@@ -8,7 +8,10 @@ const mongoose = require('mongoose');
 const app = express();
 
 //Define the port number the application will listen on
-const port = 4000
+const env = require('dotenv');
+env.config()
+const port = process.env.PORT
+//console.log(port);
 
 //Define Bcrypt module
 const bcrypt = require('bcrypt');
@@ -21,7 +24,7 @@ app.use(express.json())
 const db = async () => {
     try {
         //Connect to the Mongodb database at the specified URI
-      await mongoose.connect('mongodb://localhost:27017/AYAFBackend');
+      await mongoose.connect(process.env.DATABASE_STRING);
       console.log('database connection establish');
         
     } catch (error) {
